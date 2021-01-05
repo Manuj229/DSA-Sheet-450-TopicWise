@@ -1,0 +1,46 @@
+    public:
+        int minimumofthree(int a, int b, int c)
+        {
+            if(a<b && a<c)
+                return a;
+            else if(b<c)
+                return b;
+            else
+                return c;
+        
+        }
+       vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
+        {
+        vector<int> v;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while(i<n1 && j<n2 && k<n3)
+        {
+            if(a[i] == b[j] && b[j] == c[k])
+            {
+                v.push_back(a[i]);
+                i++;
+                j++;
+                k++;
+            }
+            else if(minimumofthree(a[i],b[j], c[k]) ==  a[i])
+            {
+                i++;
+            }
+            else if(minimumofthree(a[i],b[j], c[k]) ==  b[j])
+            {
+                j++;
+            }
+            else if(minimumofthree(a[i],b[j], c[k]) ==  c[k])
+            {
+                k++;
+            }
+        }
+        vector<int>::iterator ip;
+        ip = unique(v.begin(), v.begin() + v.size());
+        v.resize(distance(v.begin(), ip));
+    
+        return v;
+        }
