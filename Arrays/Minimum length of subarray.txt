@@ -1,0 +1,47 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int slidingwindow (int arr[], int n, int x)
+{
+    int sum =0;
+    int start = 0;
+    int end = 0;
+    int res = INT_MAX;
+    while(end!=n)
+    {
+        sum += arr[end++];
+        bool flag = false;
+        while(sum >= x)
+        {
+            if(sum>x)
+                flag = true;
+            sum -= arr[start];
+            res = min(res, end-start);
+            start++;
+            if(sum==x && flag)
+                break;
+        }
+    }
+    return res;
+    
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n, x;
+	    cin>>n>>x;
+	    int arr[n];
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>arr[i];
+	    }
+	    
+	    cout<<slidingwindow(arr, n, x)<<endl;
+	}
+	return 0;
+}
