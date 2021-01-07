@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define pipii pair<int,pair<int,int>> 
+using namespace std;
+int t,n,v[101][101];
+int main()
+{
+	cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                cin>>v[i][j];
+            }
+        }
+        priority_queue<pipii,vector<pipii>,greater<pipii>>q;
+        for(int i=0;i<n;i++)
+        {
+            q.push({v[i][0],{i,0}});
+        }
+        while(!q.empty())
+        {
+            pipii cur=q.top();
+            cout<<cur.first<<" ";
+            q.pop();
+            if(cur.second.second+1<n)
+            {
+                cur.second.second+=1;
+                cur.first=v[cur.second.first][cur.second.second];
+                q.push(cur);
+            }
+        }
+        cout<<endl;
+    }
+	return 0;
+}
