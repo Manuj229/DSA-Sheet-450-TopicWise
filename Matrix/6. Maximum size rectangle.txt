@@ -1,0 +1,45 @@
+int mah(int hist[], int n) 
+{ 
+    hist[n++]=0;
+    stack<int> s;
+    int mx=0;
+    for(int i=0;i<n;i++) 
+    {
+        while(!s.empty() && hist[s.top()]>hist[i])
+        {
+            int h=hist[s.top()];
+            s.pop();
+            int l=s.empty()?0:s.top()+1;
+            mx=max(mx,(i-l)*h);
+        }
+        s.push(i);
+    }
+    return mx;
+} 
+  
+int maxArea(int M[MAX][MAX], int n, int m) 
+{
+    int ans=0;
+    int hist[m+1];
+    for(int j=0;j<m;j++)
+    {
+        hist[j]=M[0][j];
+    }
+    ans=mah(hist,m);
+    for(int i=1;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(!M[i][j])
+            {
+                hist[j]=0;
+            }
+            else
+            {
+                hist[j]+=1;
+            }
+        }
+        ans=max(ans,mah(hist,m));
+    }
+    return ans;
+}
