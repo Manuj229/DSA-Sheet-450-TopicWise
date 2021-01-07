@@ -1,0 +1,27 @@
+#define pipii pair<int,pair<int,int>> 
+
+int kthSmallest(int mat[MAX][MAX], int n, int k)
+{
+        priority_queue<pipii,vector<pipii>,greater<pipii>>q;
+        for(int i=0;i<n;i++)
+        {
+            q.push({mat[i][0],{i,0}});
+        }
+        while(!q.empty())
+        {
+            pipii cur=q.top();
+            k--;
+            if(k==0)
+            {
+                return cur.first;
+            }
+            q.pop();
+            if(cur.second.second+1<n)
+            {
+                cur.second.second+=1;
+                cur.first=mat[cur.second.first][cur.second.second];
+                q.push(cur);
+            }
+        }
+        return -1;
+}
