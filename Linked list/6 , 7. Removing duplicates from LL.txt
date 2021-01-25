@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    Node *next;
+    Node(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+};
+void printlist(Node *head)
+{
+    while(head!=NULL)
+    {
+        cout<<(head->data)<<" ";
+        head = head->next;
+    }
+}
+Node *removedup(Node *head)
+{
+    Node *curr = head;
+    while(curr!=NULL && curr->next!=NULL)
+    {
+        if(curr->next->data == curr->data)
+        {
+            Node *temp = curr->next;
+            curr->next = curr->next->next;
+            delete temp;
+        }
+        else
+            curr=curr->next;
+    }
+    return head;
+}
+
+int main()
+{
+	Node *head=new Node(5);
+    head->next=new Node(10);
+	head->next->next=new Node(10);
+	head->next->next->next=new Node(20);
+	head->next->next->next->next=new Node(20);
+	head->next->next->next->next->next=new Node(20);
+//    Node *head1 = reverselliterative(head);
+    Node *head1 = removedup(head);
+    printlist(head1);
+    return 0;
+}

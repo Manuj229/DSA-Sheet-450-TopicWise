@@ -1,0 +1,45 @@
+struct Node{
+    int data;
+    Node *next;
+    Node(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+};
+void printlist(Node *head)
+{
+    while(head!=NULL)
+    {
+        cout<<(head->data)<<" ";
+        head = head->next;
+    }
+}
+Node *insertsorted(Node *head, int x)
+{
+    Node *ins = new Node(x);
+    if(head == NULL)
+        return ins;
+    if(x<head->data)
+        {ins->next = head;
+        return ins;}
+
+    Node *curr = head;
+    while(curr->next!=NULL && curr->next->data<x){
+        curr = curr->next;}
+
+    ins->next = curr->next;
+    curr->next = ins;
+    return head;
+}
+int main()
+{
+	Node *head=new Node(5);
+    head->next=new Node(10);
+	head->next->next=new Node(15);
+	head->next->next->next=new Node(20);
+	int x = 25;
+	Node *head1 = insertsorted(head, x);
+	printlist(head1);
+	return 0;
+}

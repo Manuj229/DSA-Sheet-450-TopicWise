@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    Node *next;
+    Node(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+};
+void printlist(Node *head)
+{
+    while(head!=NULL)
+    {
+        cout<<(head->data)<<" ";
+        head = head->next;
+    }
+}
+Node *reverselliterative(Node *head)
+{
+    Node *curr = head;
+    Node *prev = NULL;
+    while(curr!=NULL)
+    {
+        Node *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+Node *reversellrecursive(Node *curr, Node *prev)
+{
+    if(curr == NULL) return prev;
+    Node *next = curr->next;
+    curr->next = prev;
+    return reversellrecursive(next, curr);
+
+}
+
+
+int main()
+{
+	Node *head=new Node(5);
+    head->next=new Node(10);
+	head->next->next=new Node(15);
+	head->next->next->next=new Node(20);
+//    Node *head1 = reverselliterative(head);
+    Node *head1 = reversellrecursive(head, NULL);
+    printlist(head1);
+    return 0;
+}

@@ -1,0 +1,38 @@
+Node *reverseingroups(Node*head, int k)
+{
+    int cnt = 0;
+    Node *curr = head;
+    Node *prev = NULL;
+    Node *next = NULL;
+
+    while(curr!=NULL and cnt<k)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        cnt++;
+
+    }
+    if(next!=NULL)
+    {
+        Node *rest_head = reverseingroups(next, k);
+        head->next = rest_head;
+    }
+    return prev;
+
+}
+
+int main()
+{
+	Node *head=new Node(5);
+    head->next=new Node(10);
+	head->next->next=new Node(15);
+	head->next->next->next=new Node(20);
+	head->next->next->next->next=new Node(25);
+	head->next->next->next->next->next=new Node(30);
+//    Node *head1 = reverselliterative(head);
+    Node *head1 = reverseingroups(head,7);
+    printlist(head1);
+    return 0;
+}

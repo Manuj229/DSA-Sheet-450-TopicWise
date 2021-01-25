@@ -1,0 +1,17 @@
+bool detectLoop(Node* head)
+{
+    // your code here
+    Node *slow = head;
+    Node *fast = head;
+    
+    while(fast->next!=NULL && fast->next->next!=NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast)
+            return true;
+
+    }
+    if(fast->next==NULL || fast->next->next==NULL)
+        return false;
+}
