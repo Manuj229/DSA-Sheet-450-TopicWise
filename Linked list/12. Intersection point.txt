@@ -1,0 +1,24 @@
+int c1 = getcount(h1);
+    int c2 = getcount(h2);
+    if(c1>c2)
+    {
+        int d = c1-c2;
+        Node *movingh1tod = traversetodnodes(d, h1);
+        while(movingh1tod->next!=h2->next && movingh1tod && h2)
+        {
+            movingh1tod = movingh1tod->next;
+            h2 = h2->next;
+        }
+        return h2->next;
+    }
+    else
+    {
+        int d = c2-c1;
+        Node *movingh2tod = traversetodnodes(d, h2);
+        while(movingh2tod->next!=h1->next && movingh2tod && h1)
+        {
+            movingh2tod = movingh2tod ->next;
+            h1 = h1->next;
+        }
+        return h1->next;
+    }

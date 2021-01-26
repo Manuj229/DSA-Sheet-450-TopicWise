@@ -44,6 +44,10 @@ Node* insertend(Node *head, int data)
 }
 Node* reverseDLL(Node *head)
 {
+    if(head == NULL)
+        return NULL;
+    if(head->next == NULL)
+        return head;
     Node *temp = NULL;
     Node *curr = head;
     while(curr!=NULL)

@@ -1,0 +1,42 @@
+Node *middleofll(Node *head)
+{
+    if(head==NULL) return NULL;
+    Node *slow = head;
+    Node *fast = head;
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+Node *reverselliterative(Node *head)
+{
+    Node *curr = head;
+    Node *prev = NULL;
+    while(curr!=NULL)
+    {
+        Node *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+bool isPalindrome(Node *head)
+{
+    //Your code here
+    Node *mid = middleofll(head);
+    Node *new_head = reverselliterative(mid);
+    
+    while(new_head!=NULL)
+    {
+        if(head->data!=new_head->data)
+            return false;
+        head = head->next;
+        new_head = new_head->next;
+    }
+    return true;
+}
+

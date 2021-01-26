@@ -1,0 +1,17 @@
+Node *addtohead(Node *head)
+{
+    if(head==NULL || head->next == NULL)
+        return head;
+    Node *last = head->next;
+    Node *seclast = head;
+
+    while(last->next!=NULL)
+    {
+        last = last->next;
+        seclast = seclast->next;
+    }
+    seclast->next = NULL;
+    last->next = head;
+    head = last;
+    return head;
+}
