@@ -1,0 +1,23 @@
+vector<int> singleNumber(vector<int> nums) 
+    {
+        // Code here.
+        vector<int> v;
+        int n = nums.size();
+        int xo = 0;
+        int res1 = 0, res2 = 0;
+        for(int i=0;i<n;i++)
+            xo =xo ^ nums[i];
+    
+        int setbit = xo & ~(xo-1);
+        for(int i=0;i<n;i++)
+        {
+            if((nums[i] & setbit)!=0)
+                res1 = res1 ^ nums[i];
+            else
+                res2 = res2 ^ nums[i];
+        }
+        v.push_back(res1);
+        v.push_back(res2);
+        sort(v.begin(), v.end());
+        return v;
+    }

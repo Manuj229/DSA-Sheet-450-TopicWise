@@ -1,0 +1,12 @@
+int countBitsFlip(int a, int b){
+    
+    // Your logic here
+    int count = 0;
+    int z = (a^b);
+    while(z!=0)
+    {
+        z =z & (z-1);
+        count ++;
+    }
+    return count;
+}

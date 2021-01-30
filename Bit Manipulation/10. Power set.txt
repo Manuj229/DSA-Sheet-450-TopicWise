@@ -1,0 +1,21 @@
+class Solution{
+	public:
+		vector<string> AllPossibleStrings(string s){
+		    // Code here
+		vector<string> v;
+        int n = s.length();
+        int powsize = pow(2,n);
+
+        for(int counter  = 1;counter < powsize ;counter ++)
+        {
+            string s_curr = "";
+            for(int j=0;j<n;j++)
+            {
+                if((counter & (1<<j)) != 0)
+                s_curr += s[j];
+            }
+            v.push_back(s_curr);
+        }
+        sort(v.begin(), v.end());
+        return v;
+}

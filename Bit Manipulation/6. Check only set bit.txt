@@ -1,0 +1,27 @@
+int briankerningam(int n)
+    {
+        unsigned int res = 0;
+        while(n > 0)
+        {
+            n = n & n-1;
+            res++;
+        }
+        return res;
+    }
+
+    int findPosition(int n) {
+        // code here
+        int pos = 0;
+        
+        if(briankerningam(n) != 1)
+            return -1;
+        else
+        {
+            while(n!=0)
+            {
+                n = n >> 1;
+                pos ++ ;
+            }
+            return pos;
+        }
+    }
