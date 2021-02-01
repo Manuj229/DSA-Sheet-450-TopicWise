@@ -1,0 +1,29 @@
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+int differbyk(int arr[], int k, int x, int n)
+{
+
+    int i = 0;
+    while(i<n)
+    {
+        if(arr[i]==x)
+            return i;
+        i = i + max((abs(arr[i]-x)/k), 1);
+    }
+    return -1;
+}
+
+int main()
+{
+    int arr[] = {20,40,50,70,70,60};
+    int n = 6;
+    int x = 60;
+    int k = 20;
+    cout<<differbyk(arr, k, x,n)<<endl;
+    return 0;
+
+
+}

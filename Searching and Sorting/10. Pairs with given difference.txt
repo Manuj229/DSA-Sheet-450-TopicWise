@@ -1,0 +1,47 @@
+#include <algorithm>
+using namespace std;
+
+bool pairswithdiff(int arr[], int N, int L)
+{
+    int i = 0;
+    int j = 1;
+    sort(arr, arr+L);
+    while (i < L && j < L)  
+    {  
+        if (i != j && arr[j] - arr[i] == N)  
+        {  
+            return true;  
+        }  
+        else if (arr[j]-arr[i] < N)  
+            j++;  
+        else
+            i++;  
+    }  
+  
+    return false;  
+}
+
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int L; 
+	    int N;
+	    cin>>L>>N;
+	    int arr[L];
+	    for(int i =0;i<L;i++)
+	    {
+	        cin>>arr[i];
+	    }
+        if(pairswithdiff(arr, N, L))
+            cout<<1<<endl;
+        else
+            cout<<-1<<endl;
+	}
+	
+	return 0;
+	
+}

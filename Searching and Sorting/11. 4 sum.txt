@@ -1,0 +1,49 @@
+vector<vector<int> > fourSum(vector<int> &arr, int k) {
+    // Your code goes here
+    int i = 0;
+    int j = 0;
+    int left = 0;
+    int right = 0;
+    vector<vector<int> >quads;
+    
+    sort(arr.begin(), arr.end());
+    
+    for(i = 0;i<arr.size();i++)
+    {
+        if(i>0 && arr[i] == arr[i-1])
+            continue;
+        for(j = i+1;j<arr.size();j++)
+        {
+            if(j>i+1 && arr[j] == arr[j-1])
+                continue;
+            
+            int new_target = k - arr[i] - arr[j];
+            left = j+1;
+            right = arr.size()-1;
+            
+            while(left<right)
+            {
+                int sum = arr[left] + arr[right];
+                if(sum>new_target)
+                    right--;
+                else if(sum<new_target)
+                    left++;
+                else
+                {
+                    vector<int> v;
+                    v.push_back(arr[i]);
+                    v.push_back(arr[j]);
+                    v.push_back(arr[left]);
+                    v.push_back(arr[right]);
+                    quads.push_back(v);
+                    while(left < right && arr[left]==v[2] ) left++;
+                    while(left < right && arr[right]==v[3] ) right--;
+                }
+                
+            }
+        }
+        
+    }
+    return quads;
+    
+}

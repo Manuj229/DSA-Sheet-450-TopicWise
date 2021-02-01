@@ -1,0 +1,10 @@
+class Solution:
+    def findTwoElement( self,arr, n): 
+        # code here
+        ans = [0]*2
+        k = list(set(arr))
+        ans[0] = (sum(arr)- sum(k))
+        ans[1] = ((n*(n+1))//2)-sum(k)
+        return ans
+        
+ 
