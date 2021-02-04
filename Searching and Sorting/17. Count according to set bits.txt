@@ -1,0 +1,26 @@
+int csb(int n)
+    {
+        int count = 0;
+        while (n) {
+            n &= (n - 1);
+            count++;
+        }
+        return count;
+    }
+
+class Solution{
+    public:
+    
+    static int cmp(int a, int b)
+    {
+        int i = csb(a);
+        int j = csb(b);
+        if(i<=j) return 0;
+        return 1;
+    }
+    void sortBySetBitCount(int arr[], int n)
+    {
+        // Your code goes here
+        stable_sort(arr, arr+n, cmp);
+    }
+};
