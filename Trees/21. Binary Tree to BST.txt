@@ -1,0 +1,57 @@
+int minSwaps(vector<int> v)
+{
+    int n = v.size();
+    pair<int, int> arrpos[n];
+    for(int i=0;i<n;i++){
+        arrpos[i].first = v[i];
+        arrpos[i].second = i;
+    }
+
+    sort(arrpos, arrpos+n);
+
+    vector<int> vis(n, false);
+
+    int ans = 0;
+    for(int i=0;i<n;i++){
+        if(vis[i] || arrpos[i].second == i)
+            continue;
+
+        int cycle_size = 0;
+        int j = i;
+
+        while(!vis[j]){
+            vis[j] = 1;
+            j = arrpos[j].second;
+            cycle_size++;
+        }
+
+        if(cycle_size>0){
+            ans += (cycle_size -1);
+        }
+    }
+
+    return ans;
+}
+void inorder(int a[], std::vector<int> &v,
+                        int n, int index)
+{
+    // if index is greater or equal to vector size
+    if(index >= n)
+        return;
+    inorder(a, v, n, 2 * index + 1);
+     
+    // push elements in vector
+    v.push_back(a[index]);
+    inorder(a, v, n, 2 * index + 2);
+}
+
+int main()
+{
+  // Driver program to
+  // test the above function
+    int a[] = { 5, 6, 7, 8, 9, 10, 11 };
+    int n = sizeof(a) / sizeof(a[0]);
+    std::vector<int> v;
+    inorder(a, v, n, 0);
+    cout << minSwaps(v) << endl;
+}

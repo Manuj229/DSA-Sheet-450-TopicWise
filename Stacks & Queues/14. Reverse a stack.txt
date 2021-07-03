@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+char insert_at_bottom(stack<char> &st,char x)
+{
+
+    if(st.size() == 0)
+    st.push(x);
+
+    else
+    {
+        char a = st.top();
+        st.pop();
+        insert_at_bottom(st, x);
+        st.push(a);
+    }
+}
+void reverse1(stack<char> &st)
+{
+    if(st.size()>0)
+    {
+        char x = st.top();
+        st.pop();
+        reverse1(st);
+        insert_at_bottom(st, x);
+    }
+}
+int main()
+{
+    stack<char> st;
+    st.push('A');
+    st.push('B');
+    st.push('C');
+    st.push('D');
+
+    reverse1(st);
+    string ns = "";
+    while(!st.empty())
+    {
+        char p=st.top();
+        st.pop();
+        ns+=p;
+    }
+
+    //display of reversed stack
+    cout<<ns[3]<<" "<<ns[2]<<" "
+        <<ns[1]<<" "<<ns[0]<<endl;
+    return 0;
+}
+

@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+    
+    int util(Node* root)
+    {
+        if(root==NULL) return 0;
+        return root->data + util(root->left) + util(root->right);
+    }
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         if(root == NULL) return true;
+         if(root->left == NULL && root->right == NULL) return true;
+         
+         int l = util(root->left);
+         int r = util(root->right);
+         
+         if(l+r == root->data && isSumTree(root->left) && isSumTree(root->right))
+            return true;
+            
+        return false;
+    }
+};

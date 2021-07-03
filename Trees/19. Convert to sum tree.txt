@@ -1,0 +1,22 @@
+    int calsum(Node *root){
+        if(root==NULL) return 0;
+        if(root->left == NULL && root->right == NULL){
+            int temp = root->data;
+            root->data = 0;
+            return temp;
+        }
+        
+        int left= calsum(root->left);
+        int right = calsum(root->right);
+        
+        int val = root->data + (left+right);
+        
+        root->data = left+right;
+        
+        return val;
+    }
+    void toSumTree(Node *node)
+    {
+        // Your code here
+        calsum(node);
+    }

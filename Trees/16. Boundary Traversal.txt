@@ -1,0 +1,42 @@
+void inorder(Node *root, vector<int> &v)
+    {
+        if(root==NULL) return;
+        
+        inorder(root->left, v);
+        if(root->left == NULL && root->right == NULL) v.push_back(root->data);
+        inorder(root->right, v);
+        
+    }
+
+    vector <int> printBoundary(Node *root)
+    {
+        //Your code here
+        vector<int> v;
+        stack<int> st;
+        v.push_back(root->data);
+        Node *curr = root->left;
+        while(curr!=NULL){
+            if(curr->left == NULL && curr->right == NULL) break;
+            v.push_back(curr->data);
+            if(curr->left == NULL) curr = curr->right;
+            else curr = curr->left;
+        }
+        
+        inorder(root, v);
+        
+        curr = root->right;
+        while(curr!=NULL){
+            if(curr->left == NULL && curr->right == NULL) break;
+            st.push(curr->data);
+            if(curr->right == NULL) curr = curr->left;
+            else curr = curr->right;
+        }
+        
+        while(st.empty()==false){
+            int x = st.top();
+            st.pop();
+            v.push_back(x);
+        }
+        
+        return v;
+    }

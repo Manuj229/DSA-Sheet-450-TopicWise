@@ -1,0 +1,29 @@
+lass Solution{
+  public:
+    /*You are required to complete this method*/
+    vector<pair<Node*, int>> v;
+    
+    bool check(Node *root)
+    {
+        //Your code here
+        if(root==NULL) return true;
+        queue<pair<Node*,int>>q;
+        q.push({root, 0});
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+            Node* node = it.first;
+            int lev = it.second;
+            if(node->left!=NULL) q.push({node->left, lev+1});
+            if(node->right!=NULL) q.push({node->right, lev+1});
+            if(node->left==NULL && node->right==NULL) v.push_back({node, lev});
+        }
+        
+        set<int> s;
+        for(auto x: v){
+            s.insert(x.second);
+        }
+        
+        return (s.size() == 1);
+    }
+};

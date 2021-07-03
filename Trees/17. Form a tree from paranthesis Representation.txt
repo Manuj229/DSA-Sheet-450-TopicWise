@@ -1,0 +1,156 @@
+#include <bits/stdc++.h>
+#include<iostream>
+#include <string>
+//#define int long long
+#define endl "\n"
+using namespace std;
+struct Node
+{
+    int data;
+    Node *left, *right;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->left = this->right = nullptr;
+    }
+};
+/*
+inorderIterative(Node* root){
+    stack<Node*> st;
+    Node *curr = root;
+    while(!st.empty() || curr!=NULL){
+        if(curr!=NULL){
+            st.push(curr);
+            curr = curr->left;
+        }
+        else{
+            curr = st.top();
+            st.pop();
+            cout<<curr->data<<" ";
+            curr = curr->right;
+        }
+    }
+}
+
+
+set<float> s;
+
+int minLinesToCoverPoints(int points[][2], int N, int xO, int yO)
+{
+    for(int i=0;i<N;i++)
+    {
+        int xi = points[i][0];
+        int yi = points[i][1];
+    
+        float slope = (yi - yO) / (xi - xO);
+    
+        s.insert(slope);
+    }
+
+    return s.size();
+
+}
+
+int maxLen(int arr[], int n)
+{
+    unordered_map<int, int> mp;
+    int sum = 0;
+    int max_len = 0;
+    int end_ind = -1;
+
+    for(int i=0;i<n;i++){
+        arr[i] = (arr[i]==0)? -1:1;
+    }
+
+    for(int i=0;i<n;i++){
+        sum += arr[i];
+        if(sum == 0){
+            max_len = i+1;
+            end_ind = i;
+        }
+
+        if(mp.find(sum) != mp.end()){
+            max_len = max(max_len, i-mp[sum]);
+            end_ind = i;
+        }
+        else
+            mp[sum] = i;
+    }
+
+    return max_len;
+}
+
+int maxIndexDiff(int arr[], int n, int i, int j)
+{
+    if(arr[j]>arr[i]) return (j-i+1);
+
+
+
+    else
+    {
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        a = maxIndexDiff(arr, n, i+1, j);
+        b = maxIndexDiff(arr, n, i, j-1);
+        c = maxIndexDiff(arr, n, i+1, j-1);
+        return (max(max(a,b), c));
+    }
+}
+*/
+
+void preOrder(Node* node)
+{
+    if (node == NULL)
+        return;
+    printf("%d ", node->data);
+    preOrder(node->left);
+    preOrder(node->right);
+}
+
+Node *treeFromString(string s)
+{
+    Node *root = new Node(s[0] - '0');
+    stack<Node *> st;
+    st.push(root);
+
+    int i = 1;
+
+    while(i<s.length()){
+        if(s[i] == '('){
+            i++;
+            Node * temp = st.top();
+            if(!temp->left){
+                Node *temp2 = new Node(s[i]-'0');
+                temp->left = temp2;
+                st.push(temp2);
+            }
+            else{
+                Node *temp2 = new Node(s[i]-'0');
+                temp->right = temp2;
+                st.push(temp2);
+            }
+        }
+
+        if(s[i] == ')'){
+            st.pop();
+            i++;
+        }
+        else{
+            i++;
+        }
+    }
+
+    return root;
+
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    string str = "5(6(8)(9(2)(3)))(7(1(2)(3)))";
+    Node* root = treeFromString(str);
+    preOrder(root);    
+
+}

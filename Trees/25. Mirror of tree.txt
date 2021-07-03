@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int checkMirrorTree(int n, int e, int A[], int B[]) {
+        // code here
+        
+        vector<int> a[n+5];
+        vector<int> b[n+5];
+        
+        for(int i=0;i<2*e;i+=2){
+            a[A[i]].push_back(A[i+1]);
+            b[B[i]].push_back(B[i+1]);
+        }
+        
+        for(int i=1;i<=n;i++){
+            reverse(b[i].begin(), b[i].end());
+        }
+        
+        for(int i=1;i<=n;i++){
+            if(a[i]!=b[i])
+                return false;
+        }
+        
+        return true;
+    }
+};
